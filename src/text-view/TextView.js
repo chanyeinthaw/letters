@@ -28,7 +28,7 @@ export class TextView extends Component {
                     <span>၂၈ရက် ၆လ ၂၀၂၀</span>
                 </div>
                 <div className={classes.Text} style={styles}>
-                    <ReactMarkdown source={text} />
+                    <ReactMarkdown source={text} escapeHtml={false}/>
                 </div>
                 <Navigator nextAction={() => {}}
                         prevAction={() => {}}
@@ -41,6 +41,6 @@ export class TextView extends Component {
 
 TextView.propTypes = {
     styles: PropTypes.object,
-    text: PropTypes.object
+    text: PropTypes.string
 }
 
