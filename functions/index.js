@@ -1,4 +1,9 @@
-const {Firestore} = require('@google-cloud/firestore');
-const store = new Firestore()
+const admin = require('firebase-admin');
 
-exports.letters = require('./letters')(store)
+let serviceAccount = require('./credentials.json');
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+})
+
+exports.letters = require('./letters')(admin.firestore())
