@@ -14,12 +14,15 @@ async function getLetters(collection, limit, skip) {
     }))
 }
 
-module.exports = (store) => functions.https.onRequest(async (request, response) => {
-    if (!verifyPassword(request.header('authorization') || null)) response.status(401).send([])
+module.exports = (store) => async (request, response) => {
+    if (!verifyPassword(request.headers['authorization'] || null)) response.status(401).send([])
 
     const collection = store.collection('letters')
 
     const {limit, skip} = request.query
 
-    response.send(await getLetters(collection, limit, skip))
-});
+    response
+        .send({
+            letters: await getLetters(collection, limit, skip)
+        })
+}
