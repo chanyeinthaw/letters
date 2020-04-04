@@ -34,10 +34,6 @@
     transform: scaleX(-1);
 }
 
-.NavigationButton:nth-child(2) {
-    width: 32px;
-}
-
 .NavigationButtonDisabled {
     cursor: default;
     opacity: .5;

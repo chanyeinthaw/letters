@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classes from './Navigator.module.css'
 import cls from 'clsx'
 import arrow from './arrow.svg'
-import shuffle from './shuffle.svg'
 
 
 export class Navigator extends Component {
@@ -19,21 +18,21 @@ export class Navigator extends Component {
         return this.props.hasNext ? "ရှေ့သို့" : ""
     }
 
+    nothing() {}
+
     render() {
-        const {hasNext, hasPrev} = this.props
+        const {hasNext, hasPrev, nextAction, prevAction} = this.props
 
         return (
             <div className={classes.NavigatorContainer} >
                 <div className={classes.Navigator} >
                     <img src={arrow}
                          alt=""
+                         onClick={hasPrev ? prevAction : this.nothing}
                          className={this.getNavigationButtonClass(hasPrev)}
                          title={this.getPrevText()}/>
-                    <img src={shuffle}
-                         alt=""
-                         className={classes.NavigationButton}
-                         title="ကျပန်း"/>
                     <img src={arrow}
+                         onClick={hasNext ? nextAction : this.nothing}
                          alt=""
                          className={this.getNavigationButtonClass(hasNext)}
                          title={this.getNextText()}/>
