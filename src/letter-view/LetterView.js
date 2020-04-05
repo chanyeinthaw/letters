@@ -3,6 +3,7 @@ import {TextView} from "./text-view/TextView";
 import {defaultLetterViewState, LetterViewContext} from "./LetterViewContext";
 import {useAppContext} from "../app/AppContext";
 import {useGetLetter} from "../shared-hooks/use-get-letter";
+import {CancelToken} from "axios";
 
 export default function LetterView() {
     const [state, setState] = useState(defaultLetterViewState)
@@ -44,11 +45,13 @@ export default function LetterView() {
 
 function useLetterViewEffects(updateLetterState, page) {
     const {password} = useAppContext()
-    const getLetter = useGetLetter()
+    const [getLetter, cancelTokenSource] = useGetLetter()
 
     useEffect(() => {
         if (password !== '') {
             getLetter(page).then(updateLetterState)
         }
+
+        return () => cancelTokenSource.cancel('Component unmount')
     }, [password, page])
 }

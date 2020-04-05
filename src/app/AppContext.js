@@ -2,7 +2,7 @@ import {createContext, useContext} from "react";
 
 export const defaultAppState = {
     password: '',
-    loading: true
+    loading: false
 }
 
 export const AppContext = createContext()
