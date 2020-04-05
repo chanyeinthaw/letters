@@ -3,6 +3,7 @@ import classes from './TextView.module.css'
 import {Navigator} from "../navigator/Navigator";
 import ReactMarkdown from "react-markdown";
 import {useLetterViewContext} from "../LetterViewContext";
+import {useAppContext} from "../../app/AppContext";
 
 function convertToMMNumber(number) {
     const numberMap = ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉', '၁၀']
@@ -12,6 +13,7 @@ function convertToMMNumber(number) {
 
 export function TextView() {
     const {letter} = useLetterViewContext()
+    const {loading} = useAppContext()
 
     const getStyles = useCallback(() => {
         const {styles} = letter
@@ -21,11 +23,13 @@ export function TextView() {
             color: styles.color
         }
 
+        const opacity = {opacity: loading ? 0 : '100%'}
+
         delete _styles.backgroundColor
         delete _styles.color
 
-        return {styles: _styles, colorStyles}
-    }, [letter])
+        return {styles: {..._styles, ...opacity}, colorStyles, opacity}
+    }, [letter, loading])
 
     const getMMDate = useCallback((date) => {
         date = new Date(date)
@@ -38,11 +42,11 @@ export function TextView() {
     }, [])
 
     const {text, createdAt} = letter
-    const {styles, colorStyles} = getStyles()
+    const {styles, colorStyles, opacity} = getStyles()
 
     return (
         <div className={classes.TextView} style={colorStyles}>
-            <div className={classes.DateText}>
+            <div className={classes.DateText} style={opacity}>
                 <span>{getMMDate(createdAt)}</span>
             </div>
             <div className={classes.Text} style={styles}>

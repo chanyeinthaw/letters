@@ -7,6 +7,11 @@
     justify-content: flex-start;
 
     overflow-y: auto;
+    transition: background-color 1s ease;
+}
+
+.DateText, .Text {
+    transition: opacity 1s ease, font-size .1s ease;
 }
 
 .DateText {
@@ -26,7 +31,7 @@
     position: sticky;
     top: 0;
 
-    padding: 8px
+    padding: 8px;
 }
 
 .Text {
