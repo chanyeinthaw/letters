@@ -11,7 +11,7 @@
 }
 
 .DateText, .Text {
-    transition: opacity 1s ease, font-size .1s ease;
+    transition: opacity 1s ease;
 }
 
 .DateText {
