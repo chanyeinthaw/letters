@@ -5,11 +5,13 @@
     align-items: center;
 
     position: fixed;
-    bottom: 24px;
+    bottom: 0;
     right: 0;
     left: 0;
 
-    background: transparent;
+    padding-bottom: 24px;
+    padding-top: 8px;
+    background-color: inherit;
 }
 
 .Navigator {
