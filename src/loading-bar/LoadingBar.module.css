@@ -1,8 +1,11 @@
 .Meter {
     height: 3px;
-    position: relative;
+    position: fixed;
     background: #44ff17;
     overflow: hidden;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .Progress {
