@@ -1,23 +1,10 @@
-import {createContext} from "react";
+import {createContext, useContext} from "react";
 
 export const defaultAppState = {
     password: '',
-    letter: {
-        _id: '',
-        styles: {
-            fontSize: 24,
-            backgroundColor: '#fff',
-            color: '#fff',
-            marginLeft: 52,
-            marginRight: 52,
-            textAlign: 'center'
-        },
-        text: '',
-        createdAt: 0,
-        loading: true
-    },
-    hasNext: false,
-    currentPage: 0
+    loading: true
 }
 
-export const AppContext = createContext(null)
+export const AppContext = createContext()
+
+export const useAppContext = () => useContext(AppContext)

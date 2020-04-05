@@ -1,122 +1,41 @@
-import React, {Component} from 'react';
-import {TextView} from "../text-view/TextView";
-import  * as http from 'axios'
-import {defaultAppState, AppContext} from "./AppContext";
-import {PromptPassword} from "../prompt-password/PromptPassword";
-import {LoadingBar} from "../loading-bar/LoadingBar";
+import React, {useEffect, useState} from 'react';
+import LetterView from "../letter-view/LetterView";
+import {AppContext, defaultAppState} from "./AppContext";
+import {PromptPassword} from "./prompt-password/PromptPassword";
+import {LoadingBar} from "./loading-bar/LoadingBar";
 
-class App extends Component {
-    state = defaultAppState
+export default function App() {
+    const [state, setState] = useState(defaultAppState)
 
-    componentDidMount() {
+    const setPassword = (password) => {
+        setState({...state, password})
+        document.cookie = "password=" + password
+    }
+
+    const setLoading = (loading) => setState({...state, loading})
+
+    useEffect(() => {
         document.cookie.split('; ').map(cookie => {
             const [key, value] = cookie.split('=')
 
-            if(key === 'password') {
-                this.setState({
-                    ...this.state,
-                    password: value
-                })
-            }
+            if(key === 'password') setPassword(value)
 
             return []
         })
+    }, [])
+
+    const provide = {
+        ...state,
+
+        setLoading,
+        setPassword
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.state.loading === true) return
-        if (prevState.password === '') {
-            this.getLetter().then(this.updateLetterState.bind(this))
-        } else if (prevState.currentPage !== this.state.currentPage) {
-            this.getLetter().then(this.updateLetterState.bind(this))
-        }
-    }
-
-    async getLetter() {
-        const url = `${process.env.REACT_APP_API_URL}/letters`
-
-        this.setState({
-            ...this.state,
-            loading: true
-        })
-
-        const res = await http.get(url, {
-            validateStatus: function (status) {
-                return status >= 200 && status <= 401;
-            },
-            params: {
-                limit: 1,
-                skip: this.state.currentPage
-            },
-            headers: {
-                Authorization: this.state.password
-            }
-        })
-
-        if (res.status === 401) {
-            this.setState({
-                ...this.state,
-                password: '',
-                loading: false
-            })
-
-            return {letter: null, hasNext: false}
-        }
-
-        document.cookie = "password=" + this.state.password
-
-        const letters = res.data.letters || [null]
-
-        return {letter: letters[0], hasNext: res.data.hasNext}
-    }
-
-    updateLetterState(data) {
-        const {letter, hasNext} = data
-
-        if (!letter) return
-
-        letter.styles = JSON.parse(letter.styles)
-
-        this.setState({
-            ...this.state,
-            letter,
-            hasNext,
-            loading: false
-        })
-    }
-
-    changeCurrentPage(pivot) {
-        this.setState({
-            ...this.state,
-            currentPage: this.state.currentPage + pivot
-        })
-    }
-
-    updatePassword(password) {
-        this.setState({
-            ...this.state,
-            password
-        })
-    }
-
-    render() {
-        const provide = {
-            letter: this.state.letter,
-            hasNext: this.state.hasNext,
-            currentPage: this.state.currentPage,
-            loading: this.state.loading,
-
-            goNextPage: () => this.changeCurrentPage(+1),
-            goPrevPage: () => this.changeCurrentPage(-1)
-        }
-
-        return (
-            <AppContext.Provider value={provide}>
-                {this.state.loading ? <LoadingBar /> : null}
-                {this.state.password === '' ? <PromptPassword onEnter={this.updatePassword.bind(this)} /> : <TextView />}
-            </AppContext.Provider>
-        )
-    }
+    return (
+        <AppContext.Provider value={provide}>
+            {state.loading ? <LoadingBar /> : null}
+            {state.password === '' ? <PromptPassword /> :
+                <LetterView />}
+        </AppContext.Provider>
+    )
 }
-
-export default App;
