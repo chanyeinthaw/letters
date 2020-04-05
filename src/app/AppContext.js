@@ -13,7 +13,8 @@ export const defaultAppState = {
             textAlign: 'center'
         },
         text: '',
-        createdAt: 0
+        createdAt: 0,
+        loading: true
     },
     hasNext: false,
     currentPage: 0

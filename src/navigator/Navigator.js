@@ -3,9 +3,12 @@ import PropTypes from 'prop-types'
 import classes from './Navigator.module.css'
 import cls from 'clsx'
 import arrow from './arrow.svg'
+import {AppContext} from "../app/AppContext";
 
 
 export class Navigator extends Component {
+    static contextType = AppContext
+
     getNavigationButtonClass = (control) => cls(classes.NavigationButton, {
         [classes.NavigationButtonDisabled]: !control
     })
@@ -21,18 +24,22 @@ export class Navigator extends Component {
     nothing() {}
 
     render() {
-        const {hasNext, hasPrev, nextAction, prevAction} = this.props
+        let {loading, hasNext, currentPage, goNextPage, goPrevPage} = this.context
+        const hasPrev = !loading && currentPage !== 0
+        hasNext = !loading && hasNext
+
+        console.log('loading', loading)
 
         return (
             <div className={classes.NavigatorContainer} >
                 <div className={classes.Navigator} >
                     <img src={arrow}
                          alt=""
-                         onClick={hasPrev ? prevAction : this.nothing}
+                         onClick={hasPrev ? goPrevPage : this.nothing}
                          className={this.getNavigationButtonClass(hasPrev)}
                          title={this.getPrevText()}/>
                     <img src={arrow}
-                         onClick={hasNext ? nextAction : this.nothing}
+                         onClick={hasNext ? goNextPage : this.nothing}
                          alt=""
                          className={this.getNavigationButtonClass(hasNext)}
                          title={this.getNextText()}/>
@@ -40,11 +47,4 @@ export class Navigator extends Component {
             </div>
         )
     }
-}
-
-Navigator.propTypes = {
-    nextAction: PropTypes.func,
-    prevAction: PropTypes.func,
-    hasNext: PropTypes.bool,
-    hasPrev: PropTypes.bool
 }

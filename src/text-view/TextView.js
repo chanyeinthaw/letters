@@ -38,7 +38,7 @@ export class TextView extends Component {
     }
 
     render() {
-        const {letter, hasNext, currentPage, goNextPage, goPrevPage} = this.context
+        const {letter} = this.context
         const {text, createdAt} = letter
         const {styles, colorStyles} = this.getStyles()
 
@@ -50,10 +50,7 @@ export class TextView extends Component {
                 <div className={classes.Text} style={styles}>
                     <ReactMarkdown source={text} escapeHtml={false}/>
                 </div>
-                <Navigator nextAction={goNextPage}
-                        prevAction={goPrevPage}
-                        hasNext={hasNext}
-                        hasPrev={currentPage !== 0} />
+                <Navigator />
             </div>
         )
     }

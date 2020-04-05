@@ -3,6 +3,7 @@ import {TextView} from "../text-view/TextView";
 import  * as http from 'axios'
 import {defaultAppState, AppContext} from "./AppContext";
 import {PromptPassword} from "../prompt-password/PromptPassword";
+import {LoadingBar} from "../loading-bar/LoadingBar";
 
 class App extends Component {
     state = defaultAppState
@@ -18,11 +19,12 @@ class App extends Component {
                 })
             }
 
-            return
+            return []
         })
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state.loading === true) return
         if (prevState.password === '') {
             this.getLetter().then(this.updateLetterState.bind(this))
         } else if (prevState.currentPage !== this.state.currentPage) {
@@ -32,6 +34,11 @@ class App extends Component {
 
     async getLetter() {
         const url = `${process.env.REACT_APP_API_URL}/letters`
+
+        this.setState({
+            ...this.state,
+            loading: true
+        })
 
         const res = await http.get(url, {
             validateStatus: function (status) {
@@ -49,7 +56,8 @@ class App extends Component {
         if (res.status === 401) {
             this.setState({
                 ...this.state,
-                password: ''
+                password: '',
+                loading: false
             })
 
             return {letter: null, hasNext: false}
@@ -72,7 +80,8 @@ class App extends Component {
         this.setState({
             ...this.state,
             letter,
-            hasNext
+            hasNext,
+            loading: false
         })
     }
 
@@ -95,6 +104,7 @@ class App extends Component {
             letter: this.state.letter,
             hasNext: this.state.hasNext,
             currentPage: this.state.currentPage,
+            loading: this.state.loading,
 
             goNextPage: () => this.changeCurrentPage(+1),
             goPrevPage: () => this.changeCurrentPage(-1)
@@ -102,6 +112,7 @@ class App extends Component {
 
         return (
             <AppContext.Provider value={provide}>
+                {this.state.loading ? <LoadingBar /> : null}
                 {this.state.password === '' ? <PromptPassword onEnter={this.updatePassword.bind(this)} /> : <TextView />}
             </AppContext.Provider>
         )
