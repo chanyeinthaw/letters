@@ -3,7 +3,7 @@ const verifyPassword = require('./verify-password')
 async function getLetters(collection, limit, skip) {
     const counter = await collection.get()
     const documents = await (
-        collection.orderBy('createdAt')
+        collection.orderBy('createdAt', 'desc')
             .offset(+skip)
             .limit(+limit).get()
     )
