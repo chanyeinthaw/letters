@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Letter from "../letter-view/Letter";
+import Letter from "../letter/Letter";
 import {AppContext, defaultAppState} from "./AppContext";
 import {PromptPassword} from "./prompt-password/PromptPassword";
 import {LoadingBar} from "./loading-bar/LoadingBar";
@@ -26,7 +26,7 @@ export default function App() {
     }, [])
 
     useEffect(() => {
-        if (state.password !== '') document.location.href = '#/letter'
+        if (state.password !== '') document.location.href = '#/editor'
         else document.location.href = '#/login'
     }, [state.password])
 

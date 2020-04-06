@@ -3,7 +3,6 @@ import {TextView} from "./text-view/TextView";
 import {defaultLetterViewState, LetterContext} from "./LetterContext";
 import {useAppContext} from "../app/AppContext";
 import {useGetLetter} from "../shared-hooks/use-get-letter";
-import {CancelToken} from "axios";
 
 export default function Letter() {
     const [state, setState] = useState(defaultLetterViewState)
