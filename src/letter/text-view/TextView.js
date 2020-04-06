@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 import classes from './TextView.module.css'
 import {Navigator} from "../navigator/Navigator";
 import ReactMarkdown from "react-markdown";
-import {useLetterViewContext} from "../LetterViewContext";
+import {useLetterViewContext} from "../LetterContext";
 import {useAppContext} from "../../app/AppContext";
 
 function convertToMMNumber(number) {

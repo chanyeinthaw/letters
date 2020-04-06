@@ -18,6 +18,6 @@ export const defaultLetterViewState = {
     currentPage: 0
 }
 
-export const LetterViewContext = createContext(null)
+export const LetterContext = createContext(null)
 
-export const useLetterViewContext = () => useContext(LetterViewContext)
+export const useLetterViewContext = () => useContext(LetterContext)

@@ -2,7 +2,7 @@ import React, {useCallback} from "react";
 import classes from './Navigator.module.css'
 import cls from 'clsx'
 import arrow from './arrow.svg'
-import {useLetterViewContext} from "../LetterViewContext";
+import {useLetterViewContext} from "../LetterContext";
 
 
 export function Navigator() {

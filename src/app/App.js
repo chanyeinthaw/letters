@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import LetterView from "../letter-view/LetterView";
+import Letter from "../letter-view/Letter";
 import {AppContext, defaultAppState} from "./AppContext";
 import {PromptPassword} from "./prompt-password/PromptPassword";
 import {LoadingBar} from "./loading-bar/LoadingBar";
 import {HashRouter, Route, useHistory} from "react-router-dom";
+import Editor from "../editor/Editor";
 
 export default function App() {
     const [state, setState] = useState(defaultAppState)
@@ -25,7 +26,7 @@ export default function App() {
     }, [])
 
     useEffect(() => {
-        if (state.password !== '') document.location.href = '#/letter-view'
+        if (state.password !== '') document.location.href = '#/letter'
         else document.location.href = '#/login'
     }, [state.password])
 
@@ -51,7 +52,10 @@ function Routes() {
                 <PromptPassword />
             </Route>
             <Route path="/letter-view">
-                <LetterView />
+                <Letter />
+            </Route>
+            <Route path="/editor">
+                <Editor />
             </Route>
         </HashRouter>
     )

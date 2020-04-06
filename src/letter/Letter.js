@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {TextView} from "./text-view/TextView";
-import {defaultLetterViewState, LetterViewContext} from "./LetterViewContext";
+import {defaultLetterViewState, LetterContext} from "./LetterContext";
 import {useAppContext} from "../app/AppContext";
 import {useGetLetter} from "../shared-hooks/use-get-letter";
 import {CancelToken} from "axios";
 
-export default function LetterView() {
+export default function Letter() {
     const [state, setState] = useState(defaultLetterViewState)
     const {loading} = useAppContext()
 
@@ -37,9 +37,9 @@ export default function LetterView() {
     }
 
     return (
-        <LetterViewContext.Provider value={provide}>
+        <LetterContext.Provider value={provide}>
             {<TextView />}
-        </LetterViewContext.Provider>
+        </LetterContext.Provider>
     )
 }
 
@@ -53,5 +53,5 @@ function useLetterViewEffects(updateLetterState, page) {
         }
 
         return () => cancelTokenSource.cancel('Component unmount')
-    }, [password, page])
+    }, [page])
 }
