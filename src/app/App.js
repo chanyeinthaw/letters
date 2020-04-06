@@ -51,7 +51,7 @@ function Routes() {
             <Route path="/login">
                 <PromptPassword />
             </Route>
-            <Route path="/letter-view">
+            <Route path="/letter">
                 <Letter />
             </Route>
             <Route path="/editor">
