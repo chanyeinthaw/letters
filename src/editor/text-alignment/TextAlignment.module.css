@@ -1,0 +1,27 @@
+.TextAlignmentContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 4px;
+    border: 1px solid #a1A1a1;
+    border-radius: 2px;
+}
+
+.TextAlignmentItem {
+    font-size: 12px;
+    padding: 2px 8px 0 8px;
+    border-radius: 4px;
+    color: #212121;
+    background-color: #fafafa;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.TextAlignmentItemSelected {
+    border: 1px solid #a1a1a1;
+}
+
+.TextAlignmentItem:hover {
+    background-color: #a1a1a1;
+}

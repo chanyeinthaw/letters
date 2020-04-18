@@ -1,0 +1,31 @@
+.Options {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    border-left: solid 1px;
+
+    width: 300px;
+
+    padding: 0 20px;
+}
+
+.Option * {
+    text-align: left;
+}
+
+.Title {
+    margin-top: 12px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.Option {
+    margin-bottom: 12px;
+}
+
+.Option > p {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 8px;
+}

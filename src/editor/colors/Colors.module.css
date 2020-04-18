@@ -1,0 +1,27 @@
+.Colors {
+    display: flex;
+    flex-direction: row;
+}
+
+.ColorCell {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    padding-right: 8px;
+    padding-bottom: 8px;
+}
+
+.ColorCell:last-child {
+    padding-right: 0;
+}
+
+.Color {
+    border-radius: 2px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #a1a1a1;
+    cursor: pointer;
+}
