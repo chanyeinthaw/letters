@@ -1,6 +1,7 @@
 .Colors {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .ColorCell {
