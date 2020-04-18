@@ -1,5 +1,5 @@
 const container = require('../setup/container')
-const createExpressApp = require('../setup/express-app')
+const createExpressApp = require('../shared/express-app')
 
 function letters() {
     const firestore = container.get('store')
