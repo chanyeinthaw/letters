@@ -1,12 +1,17 @@
 import React, {useState} from 'react'
 import classes from './PromptPassword.module.css'
 import PropTypes from 'prop-types'
-import {useAppContext} from "../AppContext";
+import {usePassword} from "../../shared-hooks/use-password";
 
 export function PromptPassword() {
     const [password, _setPassword] = useState('')
-    const {setPassword} = useAppContext()
+    const {setPassword} = usePassword()
 
+    const onBtnClick = () => {
+        setPassword(password)
+
+        document.location.reload()
+    }
 
     return (
         <div className={classes.PromptPassword}>
@@ -14,7 +19,7 @@ export function PromptPassword() {
                    type="password"
                    value={password}
                    onChange={e => _setPassword(e.target.value)} />
-            <button onClick={() => setPassword(password)}>Enter</button>
+            <button onClick={onBtnClick}>Enter</button>
         </div>
     )
 }
