@@ -1,4 +1,4 @@
-const verifyPassword = require('./verify-password')
+const verifyPassword = require('../verify-password')
 
 module.exports = (store) => async (request, response) => {
     if (!verifyPassword(request.headers['authorization'] || null)) response.status(401).send([])

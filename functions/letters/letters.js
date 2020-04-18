@@ -1,4 +1,4 @@
-const verifyPassword = require('./verify-password')
+const verifyPassword = require('../verify-password')
 
 async function getLetters(collection, limit, skip) {
     const counter = await collection.get()
