@@ -4,22 +4,56 @@ import {useEditorContext} from "../EditorContext";
 import {useGetColors} from "../../shared-hooks/use-get-colors";
 import {Colors} from "../colors/Colors";
 import {TextAlignment} from "../text-alignment/TextAlignment";
+import {DatePicker} from '@blueprintjs/datetime'
+import {Slider, Button} from "@blueprintjs/core";
 
 export default function Options() {
-    const {
-        styles, text, date,
-        setStyle, setText, setDate
-    } = useEditorContext()
-
-    const {updateBackgroundColor, updateTextColor, updateTextAlignment} = useFunctions()
+    const {styles, date, setDate, text} = useEditorContext()
+    const {updateBackgroundColor, updateTextColor, updateTextAlignment, updateFontSize, updateMargins} = useFunctions()
     
-    const borderStyles = {
-        borderLeftColor: styles.color
-    }
+    const borderStyles = {borderLeftColor: styles.color}
+
+    const shouldDisabled = text === ''
 
     return (
         <div className={classes.Options} style={borderStyles}>
             <div className={classes.Title}>Options</div>
+
+            <div className={classes.Option}>
+                <p>Date</p>
+                <DatePicker
+                    highlightCurrentDay={true}
+                    reverseMonthAndYearMenus={true}
+                    onChange={setDate}
+                    defaultValue={date} />
+            </div>
+
+            <div className={classes.Option}>
+                <p>Font Size</p>
+                <Slider
+                    value={styles.fontSize}
+                    onChange={updateFontSize}
+                    stepSize={1}
+                    labelStepSize={12}
+                    min={12}
+                    max={60} />
+            </div>
+
+            <div className={classes.Option}>
+                <p>Margins</p>
+                <Slider
+                    value={styles.marginRight}
+                    onChange={updateMargins}
+                    stepSize={1}
+                    labelStepSize={50}
+                    min={0}
+                    max={200} />
+            </div>
+
+            <div className={classes.Option}>
+                <p>Text Alignment</p>
+                <TextAlignment onSelect={updateTextAlignment}/>
+            </div>
 
             <div className={classes.Option}>
                 <p>Background Color</p>
@@ -31,10 +65,7 @@ export default function Options() {
                 <Colors onSelect={updateTextColor} download={false}/>
             </div>
 
-            <div className={classes.Option}>
-                <p>Text Alignment</p>
-                <TextAlignment onSelect={updateTextAlignment}/>
-            </div>
+            <Button disabled={shouldDisabled} onClick={(s) => console.log('save')}>Save</Button>
         </div>
     )
 }
@@ -50,5 +81,11 @@ function useFunctions() {
 
     const updateTextAlignment = align => setStyle('textAlign', align)
 
-    return {updateBackgroundColor, updateTextColor, updateTextAlignment}
+    const updateFontSize = s => setStyle('fontSize', s)
+
+    const updateMargins = m => {
+        setStyle('margin', m)
+    }
+
+    return {updateBackgroundColor, updateTextColor, updateTextAlignment, updateFontSize, updateMargins}
 }

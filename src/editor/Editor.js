@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {createRef, useEffect, useRef, useState} from 'react'
 import classes from './Editor.module.css'
 import {defaultEditorState, EditorContext} from "./EditorContext";
 import Options from "./options/Options";
@@ -19,13 +19,26 @@ export default function Editor() {
         fontSize: state.styles.fontSize
     }
 
-    const setStyle = (key, value) => setState({
-        ...state,
-        styles: {
-            ...state.styles,
-            [key]: value
+    const setStyle = (key, value) => {
+        if (key === 'margin') {
+            setState({
+                ...state,
+                styles: {
+                    ...state.styles,
+                    marginLeft: value,
+                    marginRight: value
+                }
+            })
+        } else {
+            setState({
+                ...state,
+                styles: {
+                    ...state.styles,
+                    [key]: value
+                }
+            })
         }
-    })
+    }
 
     const setText = text => setState({...state, text})
 
@@ -46,9 +59,11 @@ export default function Editor() {
         <EditorContext.Provider value={provide}>
             <div className={classes.Editor} style={styles}>
                 <textarea
+                    autoFocus={true}
                     className={classes.TextView}
                     style={contentStyles}
-                    onChange={e => setText(e.target.value)}>{state.text}</textarea>
+                    value={state.text}
+                    onChange={e => setText(e.target.value)} />
                 <Options />
             </div>
         </EditorContext.Provider>

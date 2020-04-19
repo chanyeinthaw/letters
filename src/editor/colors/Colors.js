@@ -11,8 +11,8 @@ export function Colors({onSelect}) {
     return (
         <div className={classes.Colors}>
             {
-                (colors.length === 0 ? Array(7).fill('#e1e1e1') : []).map(color => (
-                    <div className={classes.ColorCell} key={color}>
+                (colors.length === 0 ? Array(7).fill('#e1e1e1') : []).map((color, i) => (
+                    <div className={classes.ColorCell} key={i}>
                         <div className={classes.Color} style={{backgroundColor: color}} onClick={() => {}}/>
                     </div>
                 ))

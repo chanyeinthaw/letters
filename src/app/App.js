@@ -17,7 +17,7 @@ export default function App() {
     const setLoading = (loading) => setState({...state, loading})
 
     useEffect(() => {
-        if (getPassword() !== '') navigate('#/letter')
+        if (getPassword() !== '') navigate('#/editor')
         else navigate('#/login')
     }, [])
 

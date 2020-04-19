@@ -4,7 +4,7 @@
     flex-direction: column;
     border-left: solid 1px;
 
-    width: 240px;
+    width: 270px;
 
     padding: 0 20px;
 }
@@ -21,7 +21,7 @@
 }
 
 .Option {
-    margin-bottom: 12px;
+    margin-bottom: 24px;
 }
 
 .Option > p {
