@@ -2,7 +2,6 @@ async function getLetters(collection, limit, skip) {
     const counter = await collection.get()
     const documents = await (
         collection
-            .where('createdAt', '<', new Date().getTime())
             .orderBy('createdAt', 'desc')
             .offset(+skip)
             .limit(+limit).get()
