@@ -5,10 +5,24 @@
     justify-content: space-between;
 }
 
+.TextViewWrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.TextViewPreview {
+    flex: 1;
+    padding: 12px;
+    max-height: 50%;
+    overflow: auto;
+}
+
 .TextView {
     flex: 1;
-    margin-top: 12px;
     border: none;
-    resize: vertical;
+    resize: none;
     outline: none;
+    padding: 12px 12px 0;
+    font-size: 18px;
 }

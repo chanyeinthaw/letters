@@ -11,7 +11,7 @@ import {useAppContext} from "../../app/AppContext";
 export default function Options({onSave}) {
     const {styles, date, setDate, text} = useEditorContext()
     const {loading} = useAppContext()
-    const {updateBackgroundColor, updateTextColor, updateTextAlignment, updateFontSize, updateMargins} = useFunctions()
+    const {updateBackgroundColor, updateTextColor} = useFunctions()
     
     const borderStyles = {borderLeftColor: styles.color}
 
@@ -31,33 +31,6 @@ export default function Options({onSave}) {
             </div>
 
             <div className={classes.Option}>
-                <p>Font Size</p>
-                <Slider
-                    value={styles.fontSize}
-                    onChange={updateFontSize}
-                    stepSize={1}
-                    labelStepSize={12}
-                    min={12}
-                    max={60} />
-            </div>
-
-            <div className={classes.Option}>
-                <p>Margins</p>
-                <Slider
-                    value={styles.marginRight}
-                    onChange={updateMargins}
-                    stepSize={1}
-                    labelStepSize={50}
-                    min={0}
-                    max={200} />
-            </div>
-
-            <div className={classes.Option}>
-                <p>Text Alignment</p>
-                <TextAlignment onSelect={updateTextAlignment}/>
-            </div>
-
-            <div className={classes.Option}>
                 <p>Background Color</p>
                 <Colors onSelect={updateBackgroundColor}/>
             </div>
@@ -73,21 +46,11 @@ export default function Options({onSave}) {
 }
 
 function useFunctions() {
-    const {
-        setStyle, setText, setDate
-    } = useEditorContext()
+    const {setStyle} = useEditorContext()
 
     const updateBackgroundColor = color => setStyle('backgroundColor', color)
 
     const updateTextColor = color => setStyle('color', color)
 
-    const updateTextAlignment = align => setStyle('textAlign', align)
-
-    const updateFontSize = s => setStyle('fontSize', s)
-
-    const updateMargins = m => {
-        setStyle('margin', m)
-    }
-
-    return {updateBackgroundColor, updateTextColor, updateTextAlignment, updateFontSize, updateMargins}
+    return {updateBackgroundColor, updateTextColor}
 }
