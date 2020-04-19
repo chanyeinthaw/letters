@@ -38,6 +38,7 @@
     margin: 36px 32px 100px 32px;
     display: flex;
     flex-direction: column;
+    align-self: center;
 }
 
 .Text * {

@@ -5,8 +5,8 @@ export const defaultEditorState = {
         fontSize: 24,
         backgroundColor: '#ffffff',
         color: '#212121',
-        marginLeft: 52,
-        marginRight: 52,
+        marginLeft: 0,
+        marginRight: 0,
         textAlign: 'unset'
     },
     text: '',
