@@ -17,8 +17,7 @@ export default function App() {
     const setLoading = (loading) => setState({...state, loading})
 
     useEffect(() => {
-        if (getPassword() !== '') navigate('#/editor')
-        else navigate('#/login')
+        if (getPassword() === '') navigate('#/login')
     }, [])
 
     const provide = {
@@ -38,15 +37,10 @@ export default function App() {
 function Routes() {
     return (
         <HashRouter>
-            <Route path="/login">
-                <PromptPassword />
-            </Route>
-            <Route path="/letter">
-                <Letter />
-            </Route>
-            <Route path="/editor">
-                <Editor />
-            </Route>
+            <Route exact path="/" component={Letter} />
+            <Route path="/letter" component={Letter} />
+            <Route path="/login" component={PromptPassword} />
+            <Route path="/editor" component={Editor} />
         </HashRouter>
     )
 }

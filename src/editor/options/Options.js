@@ -6,14 +6,16 @@ import {Colors} from "../colors/Colors";
 import {TextAlignment} from "../text-alignment/TextAlignment";
 import {DatePicker} from '@blueprintjs/datetime'
 import {Slider, Button} from "@blueprintjs/core";
+import {useAppContext} from "../../app/AppContext";
 
-export default function Options() {
+export default function Options({onSave}) {
     const {styles, date, setDate, text} = useEditorContext()
+    const {loading} = useAppContext()
     const {updateBackgroundColor, updateTextColor, updateTextAlignment, updateFontSize, updateMargins} = useFunctions()
     
     const borderStyles = {borderLeftColor: styles.color}
 
-    const shouldDisabled = text === ''
+    const shouldDisabled = loading === true || text === ''
 
     return (
         <div className={classes.Options} style={borderStyles}>
@@ -65,7 +67,7 @@ export default function Options() {
                 <Colors onSelect={updateTextColor} download={false}/>
             </div>
 
-            <Button disabled={shouldDisabled} onClick={(s) => console.log('save')}>Save</Button>
+            <Button disabled={shouldDisabled} onClick={onSave}>Save</Button>
         </div>
     )
 }

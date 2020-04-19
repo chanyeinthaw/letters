@@ -24,3 +24,7 @@ body {
 #root {
     height: 100%;
 }
+
+.bp3-datepicker .DayPicker-Day, .DayPicker-Weekday {
+    color: #212121;
+}

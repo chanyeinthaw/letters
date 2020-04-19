@@ -2,9 +2,11 @@ import React, {createRef, useEffect, useRef, useState} from 'react'
 import classes from './Editor.module.css'
 import {defaultEditorState, EditorContext} from "./EditorContext";
 import Options from "./options/Options";
+import {useSaveLetter} from "../shared-hooks/use-save-letter";
 
 export default function Editor() {
     const [state, setState] = useState(defaultEditorState)
+    const saveLetter = useSaveLetter()
 
     const styles = {
         backgroundColor: state.styles.backgroundColor,
@@ -55,6 +57,8 @@ export default function Editor() {
         setStyle, setText, setDate, setColors
     }
 
+    const onSave = () => saveLetter(state.text, state.styles, state.createdAt.getTime())
+
     return (
         <EditorContext.Provider value={provide}>
             <div className={classes.Editor} style={styles}>
@@ -64,7 +68,7 @@ export default function Editor() {
                     style={contentStyles}
                     value={state.text}
                     onChange={e => setText(e.target.value)} />
-                <Options />
+                <Options onSave={onSave}/>
             </div>
         </EditorContext.Provider>
     )
