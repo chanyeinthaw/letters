@@ -3,7 +3,6 @@ import classes from './Editor.module.css'
 import {defaultEditorState, EditorContext} from "./EditorContext";
 import Options from "./options/Options";
 import {useSaveLetter} from "../shared-hooks/use-save-letter";
-import MarkdownEditor from "@uiw/react-markdown-editor";
 import ReactMarkdown from "react-markdown";
 
 export default function Editor() {
