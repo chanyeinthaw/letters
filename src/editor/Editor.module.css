@@ -16,6 +16,7 @@
     padding: 12px;
     max-height: 50%;
     overflow: auto;
+    align-self: center;
 }
 
 .TextView {
