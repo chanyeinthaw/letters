@@ -13,8 +13,29 @@ async function getLetters(collection, limit, skip) {
     })), skip < counter.size-1]
 }
 
+async function getLetter(collection, id) {
+    const document = await (
+        collection.doc(id).get()
+    )
+
+    if (!document.exists) return null
+
+    return {
+        _id: document.id,
+        ...document.data()
+    }
+}
+
 module.exports = (store) => async (request, response) => {
     const collection = store.collection('letters')
+
+    if (request.params.id) {
+        const letter = await getLetter(collection, request.params.id)
+
+        if (!letter) response.status(400).send()
+
+        return response.send(letter)
+    }
 
     const {limit, skip} = request.query
 
