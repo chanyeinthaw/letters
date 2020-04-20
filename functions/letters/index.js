@@ -7,6 +7,7 @@ function letters() {
     const letters = createExpressApp()
 
     letters.get('/:id?', require('./letters')(firestore))
+    letters.delete('/:id', require('./delete-letter')(firestore))
     letters.post('/', require('./new-letter')(firestore))
 
     return letters

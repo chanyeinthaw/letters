@@ -3,15 +3,14 @@ const verifyPassword = require('../shared/verify-password')
 module.exports = (store) => async (request, response) => {
     if (!verifyPassword(request.headers['authorization'] || null)) response.status(401).send([])
 
-    console.log(request.headers)
-
-    const doc = await store.collection('letters').add({
-        createdAt: parseInt(request.headers['createdat']),
-        styles: request.headers['styles'],
-        text: request.body
-    })
+    const doc = (await store.collection('letters').add({
+        createdAt: request.body.createdAt,
+        styles: request.body.styles,
+        text: request.body.text
+    }))
 
     response.send({
-        letterId: doc.id
+        _id: doc.id,
+        ...request.body
     })
 }
