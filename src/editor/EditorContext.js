@@ -1,6 +1,7 @@
 import {createContext, useContext} from "react";
 
 export const defaultEditorState = {
+    _id: undefined,
     styles: {
         backgroundColor: '#ffffff',
         color: '#212121',

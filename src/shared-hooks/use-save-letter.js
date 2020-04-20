@@ -9,13 +9,14 @@ export function useSaveLetter() {
     const navigateLogin = useNavigateLogin()
     const navigate = useNavigate()
 
-    return async (text, styles, date) => {
+    return async (id, text, styles, date) => {
         const url = `${process.env.REACT_APP_API_URL}/letters`
         const requestToken = Date.now() + 'save-letter'
 
         setLoading(requestToken)
 
         const data = {
+            _id: id,
             text: text,
             createdAt: date,
             styles: styles

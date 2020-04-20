@@ -19,8 +19,11 @@ export default function Editor() {
             if (!id) return
             const letter = await getLetter(id)
 
+            if (!letter) return
+
             setState({
                 ...state,
+                _id: id,
                 text: letter.text,
                 createdAt: new Date(letter.createdAt),
                 styles: typeof letter.styles === "string" ? JSON.parse(letter.styles) : letter.styles
@@ -58,7 +61,7 @@ export default function Editor() {
         setStyle, setText, setDate, setColors
     }
 
-    const onSave = () => saveLetter(state.text, state.styles, state.createdAt.getTime())
+    const onSave = () => saveLetter(state._id, state.text, state.styles, state.createdAt.getTime())
 
     return (
         <EditorContext.Provider value={provide}>
