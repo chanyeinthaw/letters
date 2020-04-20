@@ -40,7 +40,7 @@ function Routes() {
             <Route exact path="/" component={Letter} />
             <Route path="/letter" component={Letter} />
             <Route path="/login" component={PromptPassword} />
-            <Route path="/editor" component={Editor} />
+            <Route path="/editor/:id?" component={Editor} />
         </HashRouter>
     )
 }

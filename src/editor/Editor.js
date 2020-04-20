@@ -4,10 +4,18 @@ import {defaultEditorState, EditorContext} from "./EditorContext";
 import Options from "./options/Options";
 import {useSaveLetter} from "../shared-hooks/use-save-letter";
 import ReactMarkdown from "react-markdown";
+import {useParams} from "react-router";
 
 export default function Editor() {
     const [state, setState] = useState(defaultEditorState)
     const saveLetter = useSaveLetter()
+    const {id} = useParams()
+
+    useEffect(() => {
+        if (id) {
+
+        }
+    }, [])
 
     const styles = {
         backgroundColor: state.styles.backgroundColor,

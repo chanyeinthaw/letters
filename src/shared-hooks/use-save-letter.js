@@ -7,6 +7,7 @@ export function useSaveLetter() {
     const {setLoading} = useAppContext()
     const {getPassword, setPassword} = usePassword()
     const navigateLogin = useNavigateLogin()
+    const navigate = useNavigate()
 
     return async (text, styles, date) => {
         const url = `${process.env.REACT_APP_API_URL}/letters`
@@ -16,7 +17,7 @@ export function useSaveLetter() {
         const data = {
             text: text,
             createdAt: date,
-            styles: JSON.stringify(styles)
+            styles: styles
         }
 
         const res = await http.post(url, data, {
@@ -28,11 +29,13 @@ export function useSaveLetter() {
 
         if (res.status === 401) {
             setPassword('')
-            navigateLogin()
             setLoading(false)
+            navigateLogin()
+
+            return
         }
 
-        alert('Letter Saved !')
-        document.location.reload()
+        navigate(`#/editor/${res.data._id}`)
+        setLoading(false)
     }
 }

@@ -14,7 +14,7 @@ export default function Letter() {
 
         if (!letter) return
 
-        letter.styles = JSON.parse(letter.styles)
+        letter.styles = typeof letter.styles === "string" ? JSON.parse(letter.styles) : letter.styles
 
         setState({
             ...state, letter, hasNext
