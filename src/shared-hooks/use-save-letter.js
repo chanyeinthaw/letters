@@ -11,8 +11,9 @@ export function useSaveLetter() {
 
     return async (text, styles, date) => {
         const url = `${process.env.REACT_APP_API_URL}/letters`
+        const requestToken = Date.now() + 'save-letter'
 
-        setLoading(true)
+        setLoading(requestToken)
 
         const data = {
             text: text,
@@ -29,13 +30,13 @@ export function useSaveLetter() {
 
         if (res.status === 401) {
             setPassword('')
-            setLoading(false)
+            setLoading(requestToken, true)
             navigateLogin()
 
             return
         }
 
         navigate(`#/editor/${res.data._id}`)
-        setLoading(false)
+        setLoading(requestToken, true)
     }
 }

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {TextView} from "./text-view/TextView";
 import {defaultLetterViewState, LetterContext} from "./LetterContext";
 import {useAppContext} from "../app/AppContext";
-import {useGetLetter} from "../shared-hooks/use-get-letter";
+import {useGetLetters} from "../shared-hooks/use-get-letters";
 import {usePassword} from "../shared-hooks/use-password";
 
 export default function Letter() {
@@ -45,7 +45,7 @@ export default function Letter() {
 
 function useLetterViewEffects(updateLetterState, page) {
     const {getPassword} = usePassword()
-    const [getLetter, cancelTokenSource] = useGetLetter()
+    const [getLetter, cancelTokenSource] = useGetLetters()
 
     useEffect(() => {
         if (getPassword() !== '') {

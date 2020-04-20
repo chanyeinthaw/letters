@@ -4,9 +4,12 @@ import {useGetColors} from "../../shared-hooks/use-get-colors";
 import {useEditorContext} from "../EditorContext";
 
 export function Colors({onSelect}) {
-    const {colors} = useEditorContext()
+    const [colors, setColors] = useState([])
+    const getColors = useGetColors()
 
-    useOnMount()
+    useEffect(() => {
+        getColors().then(colors => setColors(colors))
+    }, [])
 
     return (
         <div className={classes.Colors}>
@@ -25,13 +28,4 @@ export function Colors({onSelect}) {
             ))}
         </div>
     )
-}
-
-function useOnMount() {
-    const getColors = useGetColors()
-    const {setColors} = useEditorContext()
-
-    useEffect(() => {
-        getColors().then(colors => setColors(colors))
-    }, [])
 }

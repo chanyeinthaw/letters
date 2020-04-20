@@ -6,8 +6,7 @@ export const defaultEditorState = {
         color: '#212121',
     },
     text: '',
-    createdAt: new Date(),
-    colors: []
+    createdAt: new Date()
 }
 
 export const EditorContext = createContext()

@@ -5,16 +5,27 @@ import Options from "./options/Options";
 import {useSaveLetter} from "../shared-hooks/use-save-letter";
 import ReactMarkdown from "react-markdown";
 import {useParams} from "react-router";
+import {useGetLetter} from "../shared-hooks/use-get-letters";
 
 export default function Editor() {
     const [state, setState] = useState(defaultEditorState)
     const saveLetter = useSaveLetter()
+    const getLetter = useGetLetter()
+
     const {id} = useParams()
 
     useEffect(() => {
-        if (id) {
+        (async () => {
+            if (!id) return
+            const letter = await getLetter(id)
 
-        }
+            setState({
+                ...state,
+                text: letter.text,
+                createdAt: new Date(letter.createdAt),
+                styles: typeof letter.styles === "string" ? JSON.parse(letter.styles) : letter.styles
+            })
+        })().then()
     }, [])
 
     const styles = {

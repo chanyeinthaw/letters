@@ -11,7 +11,8 @@ export function useGetColors() {
     return async () => {
         const url = `${process.env.REACT_APP_API_URL}/colors`
 
-        setLoading(true)
+        const requestToken = Date.now() + 'colors'
+        setLoading(requestToken)
 
         const res = await http.get(url, {
             validateStatus: (status) => status >= 200 && status <= 401,
@@ -21,14 +22,14 @@ export function useGetColors() {
         })
 
         if (res.status === 401) {
-            setLoading(false)
+            setLoading(requestToken, true)
             setPassword('')
             navigateLogin()
 
             return []
         }
 
-        setLoading(false)
+        setLoading(requestToken, true)
 
         return res.data.colors
     }

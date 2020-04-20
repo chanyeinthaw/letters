@@ -1,7 +1,8 @@
 import {createContext, useContext} from "react";
 
 export const defaultAppState = {
-    loading: false
+    loading: false,
+    requests: []
 }
 
 export const AppContext = createContext()

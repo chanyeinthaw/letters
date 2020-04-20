@@ -14,7 +14,17 @@ export default function App() {
     const navigate = useNavigate()
 
 
-    const setLoading = (loading) => setState({...state, loading})
+    const setLoading = (request, remove = false) => {
+        let requests = state.requests
+        if (!remove) requests.push(request)
+        else requests.splice(requests.indexOf(request), 1)
+
+        setState({
+            ...state,
+            requests: requests,
+            loading: requests.length > 0
+        })
+    }
 
     useEffect(() => {
         if (getPassword() === '') navigate('#/login')
