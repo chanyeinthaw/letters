@@ -13,16 +13,16 @@ export function useSaveLetter() {
 
         setLoading(true)
 
-        const res = await http.request({
-            method: 'POST',
-            url: url,
-            data: text,
+        const data = {
+            text: text,
+            createdAt: date,
+            styles: JSON.stringify(styles)
+        }
+
+        const res = await http.post(url, data, {
             validateStatus: (status) => status >= 200 && status <= 401,
             headers: {
                 Authorization: getPassword(),
-                styles: JSON.stringify(styles),
-                createdAt: date,
-                'Content-Type': 'text/plain'
             }
         })
 
