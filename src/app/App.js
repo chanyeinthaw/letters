@@ -7,6 +7,7 @@ import {HashRouter, Route} from "react-router-dom";
 import Editor from "../editor/Editor";
 import {usePassword} from "../shared-hooks/use-password";
 import {useNavigate} from "../shared-hooks/use-navigate";
+import {Home} from "../home/Home";
 
 export default function App() {
     const [state, setState] = useState(defaultAppState)
@@ -47,7 +48,7 @@ export default function App() {
 function Routes() {
     return (
         <HashRouter>
-            <Route exact path="/" component={Letter} />
+            <Route exact path="/" component={Home} />
             <Route path="/letter/:id" component={Letter} />
             <Route path="/login" component={PromptPassword} />
             <Route path="/editor/:id?" component={Editor} />

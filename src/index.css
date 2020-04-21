@@ -28,3 +28,7 @@ body {
 .bp3-datepicker .DayPicker-Day, .DayPicker-Weekday {
     color: #212121;
 }
+
+.bp3-button-text {
+    margin-top: 4px;
+}

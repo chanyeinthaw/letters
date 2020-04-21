@@ -1,0 +1,54 @@
+.Home {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    margin-bottom: 32px;
+}
+
+.Header {
+    width: 612px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.Letters {
+    margin-top: 8px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 912px;
+}
+
+.LetterColumn {
+    width: 300px;
+    padding: 8px;
+}
+
+.Letter {
+    font-weight: bold;
+    font-size: 1.5em;
+
+    height: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: default;
+    position: relative;
+}
+
+.LetterColor {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+
+    border: 1px solid #c4c4c4;
+    border-radius: 100%;
+}

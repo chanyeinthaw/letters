@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import {useLetterViewContext} from "../LetterContext";
 import {useAppContext} from "../../app/AppContext";
 
-function convertToMMNumber(number) {
+export function convertToMMNumber(number) {
     const numberMap = ['၀', '၁', '၂', '၃', '၄', '၅', '၆', '၇', '၈', '၉', '၁၀']
 
     return [...number+''].map(n => numberMap[n]).join('')

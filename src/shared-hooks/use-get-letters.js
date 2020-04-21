@@ -4,21 +4,19 @@ import {usePassword} from "./use-password";
 import {useNavigateLogin} from "./use-navigate";
 
 export function useGetLetters() {
-    const cancelTokenSource = http.CancelToken.source()
     const {setLoading} = useAppContext()
     const {getPassword, setPassword} = usePassword()
     const navigateLogin = useNavigateLogin()
 
-    return [async (page) => {
+    return async (limit, skip) => {
         const url = `${process.env.REACT_APP_API_URL}/letters`
         const requestToken = Date.now() + 'letters'
 
         setLoading(requestToken)
 
         const res = await http.get(url, {
-            cancelToken: cancelTokenSource.token,
             validateStatus: (status) => status >= 200 && status <= 401,
-            params: {limit: 1, skip: page},
+            params: {limit: limit, skip: skip},
             headers: {
                 Authorization: getPassword()
             }
@@ -29,15 +27,13 @@ export function useGetLetters() {
             navigateLogin()
             setLoading(requestToken, true)
 
-            return {letter: null, hasNext: false}
+            return {letters: [], hasNext: false}
         }
-
-        const letters = res.data.letters || [null]
 
         setLoading(requestToken, true)
 
-        return {letter: letters[0], hasNext: res.data.hasNext}
-    }, cancelTokenSource]
+        return res.data
+    }
 }
 
 export function useGetLetter() {
