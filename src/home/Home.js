@@ -21,7 +21,7 @@ export function Home() {
     const getLetters = useGetLetters()
 
     window.onscroll = () => {
-        if ((window.innerHeight + window.scrollY - 32) >= homeRef.current.offsetHeight) {
+        if ((window.innerHeight + window.scrollY - 32 ) >= homeRef.current.offsetHeight) {
             if (hasNext)
                 setPagination({
                     limit: pagination.limit,
