@@ -1,11 +1,9 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import classes from './Options.module.css'
 import {useEditorContext} from "../EditorContext";
-import {useGetColors} from "../../shared-hooks/use-get-colors";
 import {Colors} from "../colors/Colors";
-import {TextAlignment} from "../text-alignment/TextAlignment";
 import {DatePicker} from '@blueprintjs/datetime'
-import {Slider, Button} from "@blueprintjs/core";
+import {Button} from "@blueprintjs/core";
 import {useAppContext} from "../../app/AppContext";
 
 export default function Options({onSave}) {

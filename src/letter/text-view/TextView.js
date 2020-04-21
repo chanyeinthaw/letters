@@ -1,6 +1,5 @@
 import React, {useCallback} from "react";
 import classes from './TextView.module.css'
-import {Navigator} from "../navigator/Navigator";
 import ReactMarkdown from "react-markdown";
 import {useLetterViewContext} from "../LetterContext";
 import {useAppContext} from "../../app/AppContext";
@@ -52,7 +51,6 @@ export function TextView() {
             <div className={classes.Text} style={styles}>
                 <ReactMarkdown source={text} escapeHtml={false}/>
             </div>
-            <Navigator />
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, {createRef, useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import classes from './Editor.module.css'
 import {defaultEditorState, EditorContext} from "./EditorContext";
 import Options from "./options/Options";
