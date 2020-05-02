@@ -1,3 +1,3 @@
 module.exports = (password) => {
-    return password === '102019'
+    return password === '102030'
 }
